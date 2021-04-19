@@ -3,7 +3,7 @@
     <h1 class="text-4xl text-center">{{ board.title }}</h1>
     <p class="mt-2 text-gray-600 text-center">{{ board.description }}</p>
     <div class="flex gap-10 items-start mt-5 py-5 px-10 bg-gray-200 overflow-auto">
-      <Collection v-for="collection in board.collections" class="flex-shrink-0 w-70" :collection="collection" @removeCollection="removeCollection" />
+      <Collection v-for="collection in board.collections" :key="collection.key" class="flex-shrink-0 w-70" :collection="collection" @removeCollection="removeCollection" />
       <div class="flex-shrink-0 w-70">
         <button @click="addCollection()" class="flex items-center p-1 hover:bg-gray-300 rounded focus:outline-none">
           <i-ic:baseline-add class="text-gray-700" />
@@ -29,10 +29,10 @@
         {
           statusName: 'Next Up',
           color: colors[0],
-          num: 1,
+          key: 1,
           blocks: [
-            { name: 'Exemple de titre de block !', num: 1 },
-            { name: 'Exemple de block !', num: 2}
+            { name: 'Exemple de titre de block !', key: 1 },
+            { name: 'Exemple de block !', key: 2}
           ] 
         }
       ]
@@ -40,11 +40,11 @@
   )
 
   const addCollection = () => {
-    board.collections.push({ num: board.collections.length + 1, color: colors[Math.floor(Math.random() * colors.length)], blocks : [] })
+    board.collections.push({ key: board.collections.length + 1, color: colors[Math.floor(Math.random() * colors.length)], blocks : [] })
   }
 
-  const removeCollection = (num) => {
-    board.collections = board.collections.filter(item => item.num !== num)
+  const removeCollection = (key) => {
+    board.collections = board.collections.filter(item => item.key !== key)
   }
 
 

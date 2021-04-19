@@ -33,7 +33,7 @@
 
   watch(
     () => block.value.name,
-    (value) => block.value.name = value.replace(/(\r\n|\n|\r)/gm, "")
+    (value) => value ? block.value.name = value.replace(/(\r\n|\n|\r)/gm, "") : ''
   )
 
   const resizeTextarea = (event) => {
@@ -43,7 +43,7 @@
 
   const evalInput = (value) => {
     showInput.value = value
-    if (!block.value.name) emit('removeBlock', block.value.num)
+    if (!block.value.name) emit('removeBlock', block.value.key)
   }
 
 </script>

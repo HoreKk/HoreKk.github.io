@@ -8,15 +8,15 @@
       <button class="flex items-center ml-auto p-1 hover:bg-gray-300 rounded focus:outline-none">
         <i-mi:options-horizontal class="text-gray-700" />
       </button>
-      <button class="flex items-center p-1 hover:bg-gray-300 rounded focus:outline-none">
+      <button @click="addBlock('unshift')" class="flex items-center p-1 hover:bg-gray-300 rounded focus:outline-none">
         <i-ic:baseline-add class="text-gray-700" />
       </button>
     </div>
     <div v-else>
       <input v-model="collection.statusName" class="focus:outline-none p-1 rounded-lg overflow-hidden w-1/1" ref="elInput" type="text" @keyup.enter="evalInput(false)" @blur="evalInput(false)" >
     </div>
-    <Block v-for="block in collection.blocks" :block="block" @removeBlock="removeBlock" />
-    <button @click="addBlock()" class="flex items-center mt-3 p-1 hover:bg-gray-300 rounded focus:outline-none w-1/1">
+    <Block v-for="block in collection.blocks" :key="block.key" :block="block" @removeBlock="removeBlock" />
+    <button @click="addBlock('push')" class="flex items-center mt-3 p-1 hover:bg-gray-300 rounded focus:outline-none w-full">
       <i-ic:baseline-add class="text-gray-700" />
       <span class="text-gray-700 ml-1">Nouveau block</span>
     </button>
@@ -55,17 +55,17 @@
 
     if (!collection.value.statusName) {
       if (oldStatusName.value) collection.value.statusName = oldStatusName.value
-      if (!oldStatusName.value) emit('removeCollection', collection.value.num)
+      if (!oldStatusName.value) emit('removeCollection', collection.value.key)
     }
 
   }
  
-  const addBlock = () => {
-    collection.value.blocks.push({ num: collection.value.blocks.length + 1, name: '' })
+  const addBlock = (order) => {
+    collection.value.blocks[order]({ key: collection.value.blocks.length + 1 })
   }
 
-  const removeBlock = (num) => {
-    collection.value.blocks = collection.value.blocks.filter(item => item.num !== num)
+  const removeBlock = (key) => {
+    collection.value.blocks = collection.value.blocks.filter(item => item.key !== key )
   }
 
 </script>
