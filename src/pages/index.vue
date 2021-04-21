@@ -6,7 +6,7 @@
         <div class="flex flex-col lg:flex-row gap-5 justify-center bg-gray-100 p-4 rounded-xl">
           <i-cib:notion class="hidden lg:block text-gray-700 h-10 w-10 my-auto mx-2 xl:mx-8" />
           <div class="flex flex-col justify-center flex-1 gap-2 items-start">
-            <h1 class="text-2xl">Notion clone</h1>
+            <h1 class="text-2xl">Notion / Trello clone</h1>
             <p class="text-gray-500">Tableau avec des collections et des block qui sont interchangeable entre collections</p>
           </div>
           <div class="h-full my-auto self-end mx-1">
