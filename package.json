@@ -7,14 +7,16 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vuedraggable": "^4.0.1"
   },
   "devDependencies": {
+    "@headlessui/vue": "^1.0.0",
     "@iconify/json": "^1.1.330",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.5",
     "sass": "^1.32.10",
-    "vite": "^2.1.5",
+    "vite": "^2.2.0",
     "vite-plugin-components": "^0.8.4",
     "vite-plugin-icons": "^0.5.0",
     "vite-plugin-pages": "^0.9.5",

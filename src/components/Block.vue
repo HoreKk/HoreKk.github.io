@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-gray-600 hover:bg-gray-500 rounded mt-3 p-3 cursor-pointer">
+  <div class="relative cursor-pointer select-none bg-gray-600 hover:bg-gray-500 rounded mt-3 p-3 cursor-pointer wrapperBlock">
+    <div class="hidden absolute right-0 top-0 editBlock p-1 mt-2.4 mr-2.4 rounded bg-gray-200 hover:bg-gray-50 focus:outline-none"
+         @click="evalInput(true)" :class="{ 'opacity-0' : showInput }" >
+      <i-bx:bxs-edit class="text-gray-700" />
+    </div>
     <template v-if="!showInput">
       <span class="text-white break-words">{{ block.name }}</span>
     </template>
@@ -23,27 +27,44 @@
 
   const elInput = ref(null)
   const showInput = ref(false)
+  let firstLoad = ref(true)
+  const heightTextarea = ref('24px')
 
   onMounted(() => {
-    if (!block.value.name) {
-      showInput.value = true
-      nextTick(() => elInput.value.focus())
-    }
+    if (!block.value.name) evalInput(true)
+    firstLoad.value = false
   })
 
-  watch(
-    () => block.value.name,
-    (value) => value ? block.value.name = value.replace(/(\r\n|\n|\r)/gm, "") : ''
-  )
+  watch(() => block.value.name, (value) => {
+    if (value) block.value.name = value.replace(/(\r\n|\n|\r)/gm, "")
+  })
 
   const resizeTextarea = (event) => {
     event.target.style.height = 'auto'
     event.target.style.height = `${event.target.scrollHeight}px`
+    heightTextarea.value = event.target.style.height
   }
 
   const evalInput = (value) => {
     showInput.value = value
-    if (!block.value.name) emit('removeBlock', block.value.key)
+
+    if (showInput.value) {
+      nextTick(() => {
+        elInput.value.focus()
+        elInput.value.style.height = heightTextarea.value
+      })
+    }
+
+    if (!block.value.name && !firstLoad.value) 
+      emit('removeBlock', block.value.key)
   }
 
 </script>
+
+<style lang="scss">
+
+  .wrapperBlock:hover .editBlock {
+    display: flex;
+  }
+
+</style>
