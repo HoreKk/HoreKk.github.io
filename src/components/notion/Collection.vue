@@ -1,15 +1,15 @@
 <template>
   <div class="flex flex-col">
-    <div class="flex items-center" v-if="!showInput">
+    <div v-if="!showInput" class="flex items-center">
       <button class="px-3 py-1 rounded-lg hover:opacity-80 focus:outline-none overflow-hidden" :style="{ 'background-color' : collection.color }" @click="evalInput(true)">
-        <span class="text-white overflow-ellipsis whitespace-nowrap">{{ collection.statusName }}</span>
+        <span class="text-white dark:text-gray-100 overflow-ellipsis whitespace-nowrap">{{ collection.statusName }}</span>
       </button>
       <span class="ml-2 mr-7 text-lg">{{ collection.blocks.length }}</span>
       <Menu as="div" class="ml-auto relative z-index-10">
-        <MenuButton class="flex p-1 rounded hover:bg-gray-300 focus:outline-none">
-          <i-mi:options-horizontal class="text-gray-700" />
+        <MenuButton class="flex p-1 rounded text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 focus:outline-none">
+          <i-mi:options-horizontal />
         </MenuButton>
-        <MenuItems class="absolute flex left-1/2 flex-col w-56 -ml-28 py-2 mt-2 bg-gray-50 divide-y divide-gray-200 rounded">
+        <MenuItems class="absolute flex left-1/2 flex-col w-56 -ml-28 py-2 mt-2 text-black bg-gray-50 divide-y divide-gray-200 rounded">
           <div class="pb-2">
             <MenuItem v-slot="{ active }" >
               <button class="flex items-center gap-2 py-1 px-3 w-full focus:outline-none" :class='{ "bg-gray-100": active }'
@@ -30,21 +30,22 @@
           </div>
         </MenuItems>
       </Menu>
-      <button @click="addBlock('unshift')" class="flex items-center p-1 hover:bg-gray-300 rounded focus:outline-none">
-        <i-ic:baseline-add class="text-gray-700" />
+      <button @click="addBlock('unshift')" class="flex items-center p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none">
+        <i-ic:baseline-add />
       </button>
     </div>
     <div v-else>
-      <input v-model="collection.statusName" class="focus:outline-none p-1 rounded-lg overflow-hidden w-1/1" ref="elInput" type="text" @keyup.enter="evalInput(false)" @blur="evalInput(false)" >
+      <input v-model="collection.statusName" class="focus:outline-none p-1 border-2 dark:text-black rounded-lg overflow-hidden w-1/1" 
+             ref="elInput" type="text" @keyup.enter="evalInput(false)" @blur="evalInput(false)" >
     </div>
     <draggable class="list-group" v-model="collection.blocks" item-key="key" group="block">
       <template #item="{ element }">
         <Block :block="element" @removeBlock="removeBlock" />
       </template>
     </draggable>
-    <button @click="addBlock('push')" class="flex items-center mt-3 p-1 hover:bg-gray-300 rounded focus:outline-none w-full">
-      <i-ic:baseline-add class="text-gray-700" />
-      <span class="text-gray-700 ml-1">Nouveau block</span>
+    <button @click="addBlock('push')" class="flex items-center mt-3 p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none w-full">
+      <i-ic:baseline-add />
+      <span class="ml-1">Nouveau block</span>
     </button>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative cursor-pointer select-none bg-gray-600 hover:bg-gray-500 rounded mt-3 p-3 cursor-pointer wrapperBlock">
+  <div class="relative cursor-pointer select-none bg-gray-600 hover:opacity-85 rounded mt-3 p-3 cursor-pointer wrapperBlock">
     <div class="hidden absolute right-0 top-0 editBlock p-1 mt-2.4 mr-2.4 rounded bg-gray-200 hover:bg-gray-50 focus:outline-none"
          @click="evalInput(true)" :class="{ 'opacity-0' : showInput }" >
       <i-bx:bxs-edit class="text-gray-700" />
