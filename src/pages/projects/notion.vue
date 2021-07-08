@@ -10,7 +10,11 @@
       </p>
     </div>
     <div class="flex gap-10 items-start text-left mt-5 py-5 h-full px-10 rounded-xl shadow-xl bg-[#FDFFFC] dark:(bg-[#3d3e42] text-white) overflow-auto">
-      <Collection v-for="collection in collections.list" :key="collection.key" class="flex-shrink-0 w-70" :collection="collection" :colors="colors" @removeCollection="removeCollection" />
+      <draggable class="flex gap-10" v-model="collections.list" item-key="key" handle=".handle" ghost-class="ghost" group="collection">
+        <template #item="{ element }">
+          <Collection :collection="element" :colors="colors" @removeCollection="removeCollection" class="flex-shrink-0 w-70" />
+        </template>
+      </draggable>
       <div class="flex-shrink-0 w-70">
         <button @click="addCollection()" class="w-full flex items-center p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none">
           <i-ic:baseline-add />
@@ -28,6 +32,7 @@
 
 <script setup>
 
+  import draggable from 'vuedraggable'
   import { reactive, ref } from 'vue'
   import { useRouter } from 'vue-router'
 
@@ -69,6 +74,5 @@
     if (collections.list.length - 1)
       collections.list = collections.list.filter(item => item.key !== key)
   }
-
 
 </script>

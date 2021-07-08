@@ -5,7 +5,10 @@
         <span class="text-white dark:text-gray-100 overflow-ellipsis whitespace-nowrap">{{ collection.statusName }}</span>
       </button>
       <span class="ml-2 mr-7 text-lg">{{ collection.blocks.length }}</span>
-      <Menu as="div" class="ml-auto relative z-index-10">
+      <button @click="addBlock('unshift')" class="ml-auto flex items-center p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none">
+        <i-ic:baseline-add />
+      </button>
+      <Menu as="div" class="relative z-index-10">
         <MenuButton class="flex p-1 rounded text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 focus:outline-none">
           <i-mi:options-horizontal />
         </MenuButton>
@@ -30,15 +33,15 @@
           </div>
         </MenuItems>
       </Menu>
-      <button @click="addBlock('unshift')" class="flex items-center p-1 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none">
-        <i-ic:baseline-add />
+      <button class="flex items-center p-1 handle text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 rounded focus:outline-none">
+        <i-ic:baseline-drag-indicator />
       </button>
     </div>
     <div v-else>
       <input v-model="collection.statusName" class="focus:outline-none p-1 border-2 dark:text-black rounded-lg overflow-hidden w-1/1" 
              ref="elInput" type="text" @keyup.enter="evalInput(false)" @blur="evalInput(false)" >
     </div>
-    <draggable class="list-group" v-model="collection.blocks" item-key="key" group="block">
+    <draggable v-model="collection.blocks" item-key="key" group="block">
       <template #item="{ element }">
         <Block :block="element" @removeBlock="removeBlock" />
       </template>
@@ -70,7 +73,7 @@
   const showInput = ref(false)
   const elInput = ref(null)
   const oldStatusName = ref(null)
-  const keyBlock = ref(1)
+  const keyBlock = ref(2)
 
   watch(() => collection.value.statusName, (value, oldValue) => {
     !value ? oldStatusName.value = oldValue : oldStatusName.value = null
