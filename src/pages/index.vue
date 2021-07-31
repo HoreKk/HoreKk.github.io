@@ -15,6 +15,12 @@ const projects = [
     title: 'Notion clone',
     description: 'Tableau avec des collections et des block qui sont interchangeable entre collections',
     path: '/projects/notion'
+  },
+  {
+    name: 'country-quiz',
+    title: 'Questionnaire pays',
+    description: 'Tableau avec des collections et des block qui sont interchangeable entre collections',
+    path: '/projects/country-quiz'
   }
 ]
 

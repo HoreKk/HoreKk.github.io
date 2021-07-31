@@ -1,8 +1,9 @@
 <template>
   <div @click="router.push(project.path)" class="cursor-pointer" style="perspective: 2000px;">
-    <div id="card-notion" class="flex flex-col lg:flex-row gap-5 p-4 bg-[#FDFFFC] dark:(bg-[#3d3e42] text-white shadow-none) hover:opacity-95 shadow-xl rounded-xl"
+    <div :id="'card-' + project.name" class="flex flex-col lg:flex-row gap-5 p-4 bg-[#FDFFFC] dark:(bg-[#3d3e42] text-white shadow-none) hover:opacity-95 shadow-xl rounded-xl"
         @mousemove="rotateCard($event)" @mouseleave="removeStyle()">
       <i-cib:notion v-if="project.name == 'notion'" class="hidden lg:block h-10 w-10 my-auto mx-2 xl:mx-6" />
+      <i-ic:baseline-quiz v-if="project.name == 'country-quiz'" class="hidden lg:block h-10 w-10 my-auto mx-2 xl:mx-6" />
       <div class="flex flex-col justify-center flex-1 gap-1 items-start">
         <h1 class="text-2xl font-weight-600">{{ project.title }}</h1>
         <p class="text-gray-700 dark:text-gray-300">{{ project.description }}</p>
@@ -24,7 +25,7 @@
 
   const rotateCard = (e) => {
 
-    let layer = document.getElementById('card-notion')
+    let layer = document.getElementById('card-' + project.name)
 
     var t = layer.getBoundingClientRect(), s = e.clientX, r = e.clientY, a = s - t.x, n = r - t.y
     , i = {
@@ -39,7 +40,7 @@
   }
 
   const removeStyle = () => {
-    document.getElementById('card-notion').style.transform = ''
+    document.getElementById('card-' + project.name).style.transform = ''
   }
 
 </script>
