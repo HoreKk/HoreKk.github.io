@@ -8,8 +8,8 @@
         <div class="flex flex-col">
           <div v-for="choice in choices" 
                :class="[ { 'hover:(bg-yellow-300 border-yellow-300 text-white) cursor-pointer' : !userAnswer }
-                        , userAnswer && answer.name == choice.name ? 'bg-green-500 border-green-500 !text-white' : ''
-                        , userAnswer && userAnswer.name == choice.name && answer.name != choice.name ? 'bg-red-500 border-red-500 !text-white' : '']" 
+                        , userAnswer && answer.name == choice.name ? 'bg-green-500 !border-green-500 !text-white' : ''
+                        , userAnswer && userAnswer.name == choice.name && answer.name != choice.name ? 'bg-red-500 !border-red-500 !text-white' : '']" 
                class="border border-blue-300 text-blue-300 mt-4 p-3 rounded-lg"
                @click="!userAnswer ? setUserAnswer(choice) : ''">
             {{ choice.translations.fr }}
